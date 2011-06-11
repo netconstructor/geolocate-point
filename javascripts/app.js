@@ -20,12 +20,18 @@
     var latlng = new L.LatLng(position.coords.latitude, position.coords.longitude);
     map.setView(latlng, 13);
     var marker = new L.GeolocateMarker(latlng, map, {});
-    var popupContent = '<p>You are in '+position.address.city+', '+position.address.country+'<br />'+position.address.street+', '+position.address.streetNumber+'</p>', 
-        popup = new L.Popup();
-
+    
+    if ($.browser.mozilla) {
+      var popupContent = '<p>You are in '+position.address.city+', '+position.address.country+'<br />'+position.address.street+', '+position.address.streetNumber+'</p>';
+    } else {
+      var popupContent = '<p>You are in latitude: '+position.coords.latitude+',<br/> longitude: '+position.coords.longitude+'</p>';
+    }
+    
+    var popup = new L.Popup();
     popup.setLatLng(latlng);
     popup.setContent(popupContent);
     map.openPopup(popup);
+
   }
 
 
