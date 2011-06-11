@@ -36,5 +36,5 @@
 
 
   function geolocateError(error) {
-    alert('Geolocation error, try again :S');
+    alert(error.message);
   }
